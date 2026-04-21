@@ -31,8 +31,7 @@
       body {
         margin: 0;
         font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
-        background:
-          radial-gradient(circle at top, #fff8fb 0%, var(--bg) 45%, #f2ebef 100%);
+        background: radial-gradient(circle at top, #fff8fb 0%, var(--bg) 45%, #f2ebef 100%);
         color: var(--text);
         line-height: 1.9;
       }
@@ -98,7 +97,7 @@
       }
 
       .hero-card {
-        background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,247,251,0.98));
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 247, 251, 0.98));
         border: 1px solid var(--line);
         border-radius: 28px;
         box-shadow: var(--shadow);
@@ -250,45 +249,170 @@
 
       .article-view {
         display: none;
-        padding: 28px;
+        padding: 34px;
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 248, 252, 0.98));
       }
 
       .article-view.active {
         display: block;
       }
 
+      .article-view::before {
+        content: "";
+        position: absolute;
+        inset: auto -120px -140px auto;
+        width: 280px;
+        height: 280px;
+        background: radial-gradient(circle, rgba(217, 143, 177, 0.12), rgba(217, 143, 177, 0));
+        pointer-events: none;
+      }
+
+      .article-view::after {
+        content: "";
+        position: absolute;
+        inset: -80px auto auto -100px;
+        width: 220px;
+        height: 220px;
+        background: radial-gradient(circle, rgba(248, 219, 232, 0.55), rgba(248, 219, 232, 0));
+        pointer-events: none;
+      }
+
       .article-back {
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        margin-bottom: 22px;
-        color: var(--muted);
-        font-size: 0.92rem;
+        margin-bottom: 20px;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: #fff6fa;
+        border: 1px solid #f0d9e4;
+        color: #8b7280;
+        font-size: 0.9rem;
+        transition: all 0.2s ease;
       }
 
       .article-back:hover {
-        color: var(--accent);
+        color: #b8648b;
+        background: #fff0f6;
+        transform: translateY(-1px);
+      }
+
+      .article-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 320px;
+        gap: 34px;
+        align-items: start;
+      }
+
+      .article-layout.no-photo {
+        grid-template-columns: 1fr;
+      }
+
+      .article-layout.no-photo .article-main {
+        max-width: 760px;
+        margin: 0 auto;
+      }
+
+      .article-layout.has-photo {
+        grid-template-columns: minmax(0, 1fr) 320px;
+      }
+
+      .article-main {
+        min-width: 0;
+        max-width: 680px;
       }
 
       .article-title {
-        margin: 0;
-        font-size: clamp(1.8rem, 3vw, 2.4rem);
-        line-height: 1.35;
+        margin: 0 0 10px;
+        font-size: clamp(2rem, 3.2vw, 2.7rem);
+        line-height: 1.28;
+        letter-spacing: 0.02em;
+        color: #43353d;
       }
 
       .article-meta {
-        margin: 12px 0 26px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        margin: 0 0 28px;
+        color: #8f7d87;
         font-size: 0.92rem;
-        color: var(--muted);
+        padding-bottom: 16px;
+        border-bottom: 1px solid #f0e5eb;
+      }
+
+      .article-meta::before {
+        content: "diary";
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: #f8dbe8;
+        color: #96566f;
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .article-body {
+        font-size: 1.02rem;
+        line-height: 2.1;
+        color: #564851;
       }
 
       .article-body p {
-        margin: 0 0 1.35em;
+        margin: 0 0 1.5em;
         white-space: pre-line;
+      }
+
+      .article-body p:first-child,
+      .lead-paragraph {
+        font-size: 1.08rem;
+        color: #4c3e46;
       }
 
       .article-body p:last-child {
         margin-bottom: 0;
+      }
+
+      .article-side {
+        display: none;
+      }
+
+      .article-side.has-photo {
+        display: block;
+      }
+
+      .article-photo {
+        margin: 0;
+        border-radius: 22px;
+        overflow: hidden;
+        border: 1px solid #eadbe2;
+        background: #fffafb;
+        box-shadow:
+          0 18px 40px rgba(95, 63, 82, 0.1),
+          0 3px 10px rgba(95, 63, 82, 0.04);
+        position: sticky;
+        top: 92px;
+      }
+
+      .article-photo img {
+        width: 100%;
+        display: block;
+        aspect-ratio: 4 / 4.8;
+        object-fit: cover;
+        background: #f2e8ee;
+      }
+
+      .article-photo figcaption {
+        padding: 14px 16px;
+        font-size: 0.9rem;
+        color: #7c6973;
+        background: linear-gradient(180deg, #fffdfd, #fff7fa);
+        border-top: 1px solid #efdee6;
+        line-height: 1.75;
       }
 
       .footer {
@@ -299,35 +423,10 @@
         padding: 18px 22px;
         border-radius: 18px;
         border: 1px solid var(--line);
-        background: rgba(255,255,255,0.7);
+        background: rgba(255, 255, 255, 0.7);
         color: var(--muted);
         font-size: 0.88rem;
         text-align: center;
-      }
-            .article-photo {
-        margin: 0 0 24px;
-        padding: 0;
-        border-radius: 20px;
-        overflow: hidden;
-        border: 1px solid var(--line);
-        background: #fff8fb;
-        box-shadow: 0 10px 24px rgba(95, 63, 82, 0.08);
-      }
-
-      .article-photo img {
-        width: 100%;
-        aspect-ratio: 4 / 3;
-        object-fit: cover;
-        display: block;
-        background: #f2e8ee;
-      }
-
-      .article-photo figcaption {
-        padding: 12px 14px;
-        font-size: 0.9rem;
-        color: var(--muted);
-        background: #fffdfd;
-        border-top: 1px solid var(--line);
       }
 
       .fiction-notice {
@@ -353,66 +452,6 @@
         line-height: 1.8;
         color: #7b6571;
       }
-      .article-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 320px;
-  gap: 28px;
-  align-items: start;
-}
-
-.article-main {
-  min-width: 0;
-}
-
-.article-side {
-  display: none;
-}
-
-.article-side.has-photo {
-  display: block;
-}
-
-.article-photo {
-  margin: 0;
-  border-radius: 20px;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  background: #fff8fb;
-  box-shadow: 0 10px 24px rgba(95, 63, 82, 0.08);
-  position: sticky;
-  top: 88px;
-}
-
-.article-photo img {
-  width: 100%;
-  display: block;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  background: #f1e8ed;
-}
-
-.article-photo figcaption {
-  padding: 12px 14px;
-  font-size: 0.9rem;
-  color: var(--muted);
-  background: #fffdfd;
-  border-top: 1px solid var(--line);
-  line-height: 1.7;
-}
-
-@media (max-width: 860px) {
-  .article-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .article-photo {
-    position: static;
-  }
-
-  .article-side {
-    order: -1;
-  }
-}
 
       @media (max-width: 900px) {
         .main-grid {
@@ -421,6 +460,33 @@
 
         .sidebar {
           order: 2;
+        }
+      }
+
+      @media (max-width: 860px) {
+        .article-layout,
+        .article-layout.has-photo,
+        .article-layout.no-photo {
+          grid-template-columns: 1fr;
+          gap: 22px;
+        }
+
+        .article-main,
+        .article-layout.no-photo .article-main {
+          max-width: 820px;
+          margin: 0 auto;
+        }
+
+        .article-side {
+          order: -1;
+        }
+
+        .article-photo {
+          position: static;
+        }
+
+        .article-photo img {
+          aspect-ratio: 16 / 10;
         }
       }
 
@@ -449,311 +515,20 @@
           align-items: flex-start;
           flex-direction: column;
         }
+
+        .article-title {
+          font-size: 1.8rem;
+        }
+
+        .article-body {
+          font-size: 0.98rem;
+          line-height: 1.95;
+        }
+
+        .article-meta {
+          margin-bottom: 22px;
+        }
       }
-      /* ===== article detail refresh ===== */
-.article-view {
-  display: none;
-  padding: 34px;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,248,252,0.98));
-}
-
-.article-view.active {
-  display: block;
-}
-
-.article-back {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 20px;
-  padding: 8px 14px;
-  border-radius: 999px;
-  background: #fff6fa;
-  border: 1px solid #f0d9e4;
-  color: #8b7280;
-  font-size: 0.9rem;
-  transition: all 0.2s ease;
-}
-
-.article-back:hover {
-  color: #b8648b;
-  background: #fff0f6;
-  transform: translateY(-1px);
-}
-
-.article-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 320px;
-  gap: 34px;
-  align-items: start;
-}
-
-.article-main {
-  min-width: 0;
-  max-width: 680px;
-}
-
-.article-title {
-  margin: 0 0 10px;
-  font-size: clamp(2rem, 3.2vw, 2.7rem);
-  line-height: 1.28;
-  letter-spacing: 0.02em;
-  color: #43353d;
-}
-
-.article-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  align-items: center;
-  margin: 0 0 28px;
-  color: #8f7d87;
-  font-size: 0.92rem;
-  padding-bottom: 16px;
-  border-bottom: 1px solid #f0e5eb;
-}
-
-.article-meta::before {
-  content: "diary";
-  display: inline-block;
-  padding: 4px 10px;
-  border-radius: 999px;
-  background: #f8dbe8;
-  color: #96566f;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.article-body {
-  font-size: 1.02rem;
-  line-height: 2.1;
-  color: #564851;
-}
-
-.article-body p {
-  margin: 0 0 1.5em;
-  white-space: pre-line;
-}
-
-.article-body p:first-child {
-  font-size: 1.08rem;
-  color: #4c3e46;
-}
-
-.article-body p:last-child {
-  margin-bottom: 0;
-}
-
-.article-side {
-  display: none;
-}
-
-.article-side.has-photo {
-  display: block;
-}
-
-.article-photo {
-  margin: 0;
-  border-radius: 22px;
-  overflow: hidden;
-  border: 1px solid #eadbe2;
-  background: #fffafb;
-  box-shadow:
-    0 18px 40px rgba(95, 63, 82, 0.10),
-    0 3px 10px rgba(95, 63, 82, 0.04);
-  position: sticky;
-  top: 92px;
-}
-
-.article-photo img {
-  width: 100%;
-  display: block;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  background: #f2e8ee;
-}
-
-.article-photo figcaption {
-  padding: 14px 16px;
-  font-size: 0.9rem;
-  color: #7c6973;
-  background: linear-gradient(180deg, #fffdfd, #fff7fa);
-  border-top: 1px solid #efdee6;
-  line-height: 1.75;
-}
-
-#articleView {
-  position: relative;
-  overflow: hidden;
-}
-
-#articleView::before {
-  content: "";
-  position: absolute;
-  inset: auto -120px -140px auto;
-  width: 280px;
-  height: 280px;
-  background: radial-gradient(circle, rgba(217,143,177,0.12), rgba(217,143,177,0));
-  pointer-events: none;
-}
-
-#articleView::after {
-  content: "";
-  position: absolute;
-  inset: -80px auto auto -100px;
-  width: 220px;
-  height: 220px;
-  background: radial-gradient(circle, rgba(248,219,232,0.55), rgba(248,219,232,0));
-  pointer-events: none;
-}
-
-@media (max-width: 860px) {
-  .article-layout {
-    grid-template-columns: 1fr;
-    gap: 22px;
-  }
-
-  .article-main {
-    max-width: none;
-  }
-
-  .article-side {
-    order: -1;
-  }
-
-  .article-photo {
-    position: static;
-  }
-
-  .article-photo img {
-    aspect-ratio: 16 / 10;
-  }
-}
-
-@media (max-width: 640px) {
-  .article-view {
-    padding: 22px 18px;
-  }
-
-  .article-title {
-    font-size: 1.8rem;
-  }
-
-  .article-body {
-    font-size: 0.98rem;
-    line-height: 1.95;
-  }
-
-  .article-meta {
-    margin-bottom: 22px;
-  }
-}
-      .lead-paragraph {
-  font-size: 1.1rem;
-  color: #4a3b44;
-}
-      .article-side.has-photo .article-photo img {
-  aspect-ratio: 4 / 4.8;
-}
-      /* ===== 記事詳細：画像あり / 画像なし の出し分け改善 ===== */
-.article-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 320px;
-  gap: 34px;
-  align-items: start;
-}
-
-.article-main {
-  min-width: 0;
-  max-width: 680px;
-}
-
-.article-side {
-  display: none;
-}
-
-.article-side.has-photo {
-  display: block;
-}
-
-/* 画像がない記事は1カラムにして本文を広く・中央寄せ */
-.article-layout.no-photo {
-  grid-template-columns: 1fr;
-}
-
-.article-layout.no-photo .article-main {
-  max-width: 760px;
-  margin: 0 auto;
-}
-
-/* 画像あり記事は本文を左、画像を右に */
-.article-layout.has-photo {
-  grid-template-columns: minmax(0, 1fr) 320px;
-}
-
-.article-layout.has-photo .article-main {
-  max-width: 680px;
-}
-
-.article-photo {
-  margin: 0;
-  border-radius: 22px;
-  overflow: hidden;
-  border: 1px solid #eadbe2;
-  background: #fffafb;
-  box-shadow:
-    0 18px 40px rgba(95, 63, 82, 0.10),
-    0 3px 10px rgba(95, 63, 82, 0.04);
-  position: sticky;
-  top: 92px;
-}
-
-.article-photo img {
-  width: 100%;
-  display: block;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  background: #f2e8ee;
-}
-
-.article-photo figcaption {
-  padding: 14px 16px;
-  font-size: 0.9rem;
-  color: #7c6973;
-  background: linear-gradient(180deg, #fffdfd, #fff7fa);
-  border-top: 1px solid #efdee6;
-  line-height: 1.75;
-}
-
-@media (max-width: 860px) {
-  .article-layout,
-  .article-layout.has-photo,
-  .article-layout.no-photo {
-    grid-template-columns: 1fr;
-    gap: 22px;
-  }
-
-  .article-main,
-  .article-layout.no-photo .article-main,
-  .article-layout.no-photo .article-main {
-  max-width: 820px;
-  margin: 0 auto;
-}
-
-  .article-side {
-    order: -1;
-  }
-
-  .article-photo {
-    position: static;
-  }
-
-  .article-photo img {
-    aspect-ratio: 16 / 10;
-  }
-}
     </style>
   </head>
   <body>
@@ -788,18 +563,18 @@
           </div>
 
           <article class="panel article-view" id="articleView">
-  <a href="#top" class="article-back" id="backButton">← 記事一覧に戻る</a>
+            <a href="#top" class="article-back" id="backButton">← 記事一覧に戻る</a>
 
-  <div class="article-layout" id="articleLayout">
-    <div class="article-main">
-      <h1 class="article-title" id="articleTitle"></h1>
-      <div class="article-meta" id="articleMeta"></div>
-      <div class="article-body" id="articleBody"></div>
-    </div>
+            <div class="article-layout" id="articleLayout">
+              <div class="article-main">
+                <h1 class="article-title" id="articleTitle"></h1>
+                <div class="article-meta" id="articleMeta"></div>
+                <div class="article-body" id="articleBody"></div>
+              </div>
 
-    <aside class="article-side" id="articleSide"></aside>
-  </div>
-</article>
+              <aside class="article-side" id="articleSide"></aside>
+            </div>
+          </article>
         </div>
 
         <aside class="sidebar" id="sidebarPanel">
@@ -818,11 +593,11 @@
               <li>2025年6月（1）</li>
               <li>2025年7月（1）</li>
               <li>2025年8月（1）</li>
-               <li>2025年9月（1）</li>
-               <li>2025年10月（1）</li>
-               <li>2026年1月（2）</li>
-               <li>2026年3月（1）</li>
-               <li>2026年4月（1）</li>
+              <li>2025年9月（1）</li>
+              <li>2025年10月（1）</li>
+              <li>2026年1月（2）</li>
+              <li>2026年3月（1）</li>
+              <li>2026年4月（1）</li>
             </ul>
           </section>
 
@@ -837,19 +612,17 @@
       </section>
     </main>
 
-   <footer class="footer container">
-  <div class="footer-card">
-    © 2026 朝倉澪の日常
-  </div>
+    <footer class="footer container">
+      <div class="footer-card">© 2026 朝倉澪の日常</div>
 
-  <div class="fiction-notice">
-    <strong>このサイトはフィクションです</strong>
-    <p>
-      このブログに登場する人物名・学校名・団体名・出来事・記述はすべて創作です。<br>
-      実在の人物・団体・事件・学校・医療機関とは一切関係ありません。
-    </p>
-  </div>
-</footer>
+      <div class="fiction-notice">
+        <strong>このサイトはフィクションです</strong>
+        <p>
+          このブログに登場する人物名・学校名・団体名・出来事・記述はすべて創作です。<br />
+          実在の人物・団体・事件・学校・医療機関とは一切関係ありません。
+        </p>
+      </div>
+    </footer>
 
     <script>
       const posts = [
@@ -889,10 +662,10 @@
           excerpt:
             "今日は放課後、栞ちゃんと駅のショッピングモールに行ってきた。時間があっという間だった。",
           image: {
-  src: "images/date-with-shiori.jpg",
-  alt: "成瀬栞と出かけた日の写真",
-  caption: "駅のショッピングモールで。いっぱい歩いて、いっぱい話した日。"
-},
+            src: "images/date-with-shiori.jpg",
+            alt: "成瀬栞と出かけた日の写真",
+            caption: "駅のショッピングモールで。いっぱい歩いて、いっぱい話した日。"
+          },
           body: [
             "今日は放課後、栞ちゃんと駅のショッピングモールに行ってきた。\nデートっていう言い方すると変だけど、なんかそう言いたくなるくらい楽しかった。笑",
             "小さい頃の話をいっぱいした。\nあの頃よく行ってた場所とか、どうでもいいことで笑ってたこととか、忘れてたことまでどんどん思い出して、時間があっという間だった。",
@@ -917,7 +690,7 @@
         },
         {
           id: "post-5",
-          date: "2026年10月24日",
+          date: "2025年10月24日",
           tag: "学校",
           title: "なんとなく怖い人",
           excerpt:
@@ -937,10 +710,10 @@
           excerpt:
             "今日、栞ちゃんが突然倒れて救急車で運ばれた。大丈夫だと思いたいけど、やっぱり心配。",
           image: {
-  src: "images/shiori-collapsed-day.jpg",
-  alt: "しおりが倒れた日の写真",
-  caption: "この日は、まさかこんなことになるなんて思ってなかった。"
-},
+            src: "images/shiori-collapsed-day.jpg",
+            alt: "しおりが倒れた日の写真",
+            caption: "この日は、まさかこんなことになるなんて思ってなかった。"
+          },
           body: [
             "今日、びっくりすることがあった。\n栞ちゃんが突然倒れて、救急車で運ばれた。",
             "本当に急なことで、最初は何が起きたのかわからなかった。\nでも、救急車の中で救急隊の人が『軽い貧血かもしれないので、そこまで深刻ではないと思います』みたいなことを言っていて、少し安心した。",
@@ -973,10 +746,10 @@
           excerpt:
             "今日の夜、Suzukiっていう人から連絡が来た。事件について何か知ってるらしい。",
           image: {
-  src: "images/message-from-suzuki.jpg",
-  alt: "Suzukiから連絡が来たときの画面",
-  caption: "夜に届いた、知らない相手からのメッセージ。"
-},
+            src: "images/message-from-suzuki.jpg",
+            alt: "Suzukiから連絡が来たときの画面",
+            caption: "夜に届いた、知らない相手からのメッセージ。"
+          },
           body: [
             "今日の夜、Suzukiっていう人から連絡が来た。",
             "最初は誰かわからなくて怖かったけど、事件のことを知ってる感じだった。\nしかも、ただの噂じゃなくて、もっと具体的なことを知ってるみたいだった。",
@@ -1032,68 +805,79 @@
           )
           .join("");
       }
-function showList() {
-  listPanel.style.display = "block";
-  articleView.classList.remove("active");
-  heroSection.style.display = "block";
-  sidebarPanel.style.display = "flex";
-  articleSide.innerHTML = "";
-  articleSide.classList.remove("has-photo");
-  articleLayout.classList.remove("has-photo", "no-photo");
-  document.title = "朝倉澪の日常 | 朝倉澪の個人ブログ";
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}function showArticle(postId) {
-  const post = posts.find((item) => item.id === postId);
-  if (!post) {
-    showList();
-    return;
-  }
 
-  articleTitle.textContent = post.title;
-  articleMeta.innerHTML = `
-    <span>${post.date}</span>
-    <span>・</span>
-    <span>${post.tag}</span>
-    <span>・</span>
-    <span>朝倉澪</span>
-  `;
+      function showList() {
+        listPanel.style.display = "block";
+        articleView.classList.remove("active");
+        heroSection.style.display = "block";
+        sidebarPanel.style.display = "flex";
 
-  const photoHtml = post.image
-    ? `
-      <figure class="article-photo">
-        <img src="${post.image.src}" alt="${post.image.alt}">
-        ${post.image.caption ? `<figcaption>${post.image.caption}</figcaption>` : ""}
-      </figure>
-    `
-    : "";
+        articleSide.innerHTML = "";
+        articleSide.classList.remove("has-photo");
+        articleLayout.classList.remove("has-photo", "no-photo");
 
-  articleBody.innerHTML = post.body
-    .map((paragraph, index) =>
-      `<p class="${index === 0 ? "lead-paragraph" : ""}">${paragraph}</p>`
-    )
-    .join("");
+        document.title = "朝倉澪の日常 | 朝倉澪の個人ブログ";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
 
-  articleSide.innerHTML = photoHtml;
-  articleSide.classList.toggle("has-photo", !!post.image);
+      function showArticle(postId) {
+        const post = posts.find((item) => item.id === postId);
 
-  articleLayout.classList.remove("has-photo", "no-photo");
-  articleLayout.classList.add(post.image ? "has-photo" : "no-photo");
+        if (!post) {
+          showList();
+          return;
+        }
 
-  listPanel.style.display = "none";
-  articleView.classList.add("active");
-  heroSection.style.display = "none";
-  sidebarPanel.style.display = "none";
-  document.title = `${post.title} | 朝倉澪の日常`;
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
+        articleTitle.textContent = post.title;
+        articleMeta.innerHTML = `
+          <span>${post.date}</span>
+          <span>・</span>
+          <span>${post.tag}</span>
+          <span>・</span>
+          <span>朝倉澪</span>
+        `;
+
+        articleBody.innerHTML = post.body
+          .map(
+            (paragraph, index) =>
+              `<p class="${index === 0 ? "lead-paragraph" : ""}">${paragraph}</p>`
+          )
+          .join("");
+
+        if (post.image) {
+          articleSide.innerHTML = `
+            <figure class="article-photo">
+              <img src="${post.image.src}" alt="${post.image.alt}" />
+              ${post.image.caption ? `<figcaption>${post.image.caption}</figcaption>` : ""}
+            </figure>
+          `;
+          articleSide.classList.add("has-photo");
+          articleLayout.classList.add("has-photo");
+          articleLayout.classList.remove("no-photo");
+        } else {
+          articleSide.innerHTML = "";
+          articleSide.classList.remove("has-photo");
+          articleLayout.classList.add("no-photo");
+          articleLayout.classList.remove("has-photo");
+        }
+
+        listPanel.style.display = "none";
+        articleView.classList.add("active");
+        heroSection.style.display = "none";
+        sidebarPanel.style.display = "none";
+        document.title = `${post.title} | 朝倉澪の日常`;
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
       }
 
       function handleRoute() {
         const hash = window.location.hash.replace("#", "");
+
         if (!hash) {
           showList();
           return;
         }
+
         showArticle(hash);
       }
 
