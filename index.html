@@ -47,9 +47,8 @@
       }
 
       .container {
-  width: min(1200px, calc(100% - 32px));
-  margin: 0 auto;
-}
+        width: min(1200px, calc(100% - 32px));
+        margin: 0 auto;
       }
 
       .site-header {
@@ -98,7 +97,7 @@
       }
 
       .hero-card {
-        background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 247, 251, 0.98));
+        background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,247,251,0.98));
         border: 1px solid var(--line);
         border-radius: 28px;
         box-shadow: var(--shadow);
@@ -143,11 +142,10 @@
         gap: 28px;
         padding: 8px 0 56px;
       }
-  
-/* 記事詳細を開いた時は、外側の右カラムを消して1カラム化 */
-.main-grid.article-mode {
-  grid-template-columns: 1fr;
-}
+
+      .main-grid.article-mode {
+        grid-template-columns: 1fr;
+      }
 
       .panel {
         background: var(--paper);
@@ -258,31 +256,11 @@
         padding: 34px;
         position: relative;
         overflow: hidden;
-        background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 248, 252, 0.98));
+        background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,248,252,0.98));
       }
 
       .article-view.active {
         display: block;
-      }
-
-      .article-view::before {
-        content: "";
-        position: absolute;
-        inset: auto -120px -140px auto;
-        width: 280px;
-        height: 280px;
-        background: radial-gradient(circle, rgba(217, 143, 177, 0.12), rgba(217, 143, 177, 0));
-        pointer-events: none;
-      }
-
-      .article-view::after {
-        content: "";
-        position: absolute;
-        inset: -80px auto auto -100px;
-        width: 220px;
-        height: 220px;
-        background: radial-gradient(circle, rgba(248, 219, 232, 0.55), rgba(248, 219, 232, 0));
-        pointer-events: none;
       }
 
       .article-back {
@@ -306,41 +284,24 @@
       }
 
       .article-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(320px, 420px);
-  gap: 40px;
-  align-items: start;
-}
+        display: grid;
+        grid-template-columns: minmax(0, 1.5fr) minmax(300px, 380px);
+        gap: 40px;
+        align-items: start;
+      }
 
-.article-layout.no-photo {
-  grid-template-columns: 1fr;
-}
+      .article-layout.no-photo {
+        grid-template-columns: 1fr;
+      }
 
-.article-layout.no-photo .article-main {
-  max-width: 860px;
-  margin: 0 auto;
-}
-
-.article-layout.has-photo {
-  grid-template-columns: minmax(0, 1.35fr) minmax(320px, 420px);
-}
-
-.article-main {
-  min-width: 0;
-  max-width: none;
-}
-
-.article-side {
-  display: none;
-}
-
-.article-side.has-photo {
-  display: block;
-}
+      .article-layout.no-photo .article-main {
+        max-width: 860px;
+        margin: 0 auto;
+      }
 
       .article-main {
         min-width: 0;
-        max-width: 680px;
+        max-width: none;
       }
 
       .article-title {
@@ -386,14 +347,9 @@
         white-space: pre-line;
       }
 
-      .article-body p:first-child,
       .lead-paragraph {
         font-size: 1.08rem;
         color: #4c3e46;
-      }
-
-      .article-body p:last-child {
-        margin-bottom: 0;
       }
 
       .article-side {
@@ -405,25 +361,25 @@
       }
 
       .article-photo {
-  margin: 0;
-  border-radius: 22px;
-  overflow: hidden;
-  border: 1px solid #eadbe2;
-  background: #fffafb;
-  box-shadow:
-    0 18px 40px rgba(95, 63, 82, 0.1),
-    0 3px 10px rgba(95, 63, 82, 0.04);
-  position: sticky;
-  top: 92px;
-}
+        margin: 0;
+        border-radius: 22px;
+        overflow: hidden;
+        border: 1px solid #eadbe2;
+        background: #fffafb;
+        box-shadow:
+          0 18px 40px rgba(95, 63, 82, 0.10),
+          0 3px 10px rgba(95, 63, 82, 0.04);
+        position: sticky;
+        top: 92px;
+      }
 
-.article-photo img {
-  width: 100%;
-  display: block;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  background: #f2e8ee;
-}
+      .article-photo img {
+        width: 100%;
+        display: block;
+        aspect-ratio: 4 / 5;
+        object-fit: cover;
+        background: #f2e8ee;
+      }
 
       .article-photo figcaption {
         padding: 14px 16px;
@@ -442,7 +398,7 @@
         padding: 18px 22px;
         border-radius: 18px;
         border: 1px solid var(--line);
-        background: rgba(255, 255, 255, 0.7);
+        background: rgba(255,255,255,0.7);
         color: var(--muted);
         font-size: 0.88rem;
         text-align: center;
@@ -483,31 +439,30 @@
       }
 
       @media (max-width: 860px) {
-  .article-layout,
-  .article-layout.has-photo,
-  .article-layout.no-photo {
-    grid-template-columns: 1fr;
-    gap: 22px;
-  }
+        .article-layout,
+        .article-layout.no-photo {
+          grid-template-columns: 1fr;
+          gap: 22px;
+        }
 
-  .article-main,
-  .article-layout.no-photo .article-main {
-    max-width: 820px;
-    margin: 0 auto;
-  }
+        .article-main,
+        .article-layout.no-photo .article-main {
+          max-width: 820px;
+          margin: 0 auto;
+        }
 
-  .article-side {
-    order: -1;
-  }
+        .article-side {
+          order: -1;
+        }
 
-  .article-photo {
-    position: static;
-  }
+        .article-photo {
+          position: static;
+        }
 
-  .article-photo img {
-    aspect-ratio: 16 / 10;
-  }
-}
+        .article-photo img {
+          aspect-ratio: 16 / 10;
+        }
+      }
 
       @media (max-width: 640px) {
         .hero {
@@ -542,10 +497,6 @@
         .article-body {
           font-size: 0.98rem;
           line-height: 1.95;
-        }
-
-        .article-meta {
-          margin-bottom: 22px;
         }
       }
     </style>
@@ -803,11 +754,11 @@
       const articleBody = document.getElementById("articleBody");
       const heroSection = document.getElementById("heroSection");
       const sidebarPanel = document.getElementById("sidebarPanel");
-      const mainGrid = document.querySelector(".main-grid");
       const backButton = document.getElementById("backButton");
       const homeLink = document.getElementById("homeLink");
       const articleSide = document.getElementById("articleSide");
       const articleLayout = document.getElementById("articleLayout");
+      const mainGrid = document.querySelector(".main-grid");
 
       function renderList() {
         postList.innerHTML = posts
@@ -826,84 +777,76 @@
           .join("");
       }
 
-     function showList() {
-  listPanel.style.display = "block";
-  articleView.classList.remove("active");
-  heroSection.style.display = "block";
-  sidebarPanel.style.display = "flex";
-  mainGrid.classList.remove("article-mode");
+      function showList() {
+        listPanel.style.display = "block";
+        articleView.classList.remove("active");
+        heroSection.style.display = "block";
+        sidebarPanel.style.display = "flex";
+        mainGrid.classList.remove("article-mode");
 
-  articleSide.innerHTML = "";
-  articleSide.classList.remove("has-photo");
-  articleLayout.classList.remove("has-photo", "no-photo");
+        articleSide.innerHTML = "";
+        articleSide.classList.remove("has-photo");
+        articleLayout.classList.remove("no-photo");
 
-  document.title = "朝倉澪の日常 | 朝倉澪の個人ブログ";
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
+        document.title = "朝倉澪の日常 | 朝倉澪の個人ブログ";
+        window.scrollTo({ top: 0, behavior: "smooth" });
       }
 
       function showArticle(postId) {
-  const post = posts.find((item) => item.id === postId);
+        const post = posts.find((item) => item.id === postId);
 
-  if (!post) {
-    showList();
-    return;
-  }
-
-  articleTitle.textContent = post.title;
-  articleMeta.innerHTML = `
-    <span>${post.date}</span>
-    <span>・</span>
-    <span>${post.tag}</span>
-    <span>・</span>
-    <span>朝倉澪</span>
-  `;
-
-  articleBody.innerHTML = post.body
-    .map(
-      (paragraph, index) =>
-        `<p class="${index === 0 ? "lead-paragraph" : ""}">${paragraph}</p>`
-    )
-    .join("");
-
-  if (post.image) {
-    articleSide.innerHTML = `
-      <figure class="article-photo">
-        <img src="${post.image.src}" alt="${post.image.alt}" />
-        ${post.image.caption ? `<figcaption>${post.image.caption}</figcaption>` : ""}
-      </figure>
-    `;
-    articleSide.classList.add("has-photo");
-    articleLayout.classList.add("has-photo");
-    articleLayout.classList.remove("no-photo");
-  } else {
-    articleSide.innerHTML = "";
-    articleSide.classList.remove("has-photo");
-    articleLayout.classList.add("no-photo");
-    articleLayout.classList.remove("has-photo");
-  }
-
-  listPanel.style.display = "none";
-  articleView.classList.add("active");
-  heroSection.style.display = "none";
-  sidebarPanel.style.display = "none";
-
-  /* ここが重要：記事詳細時は外側を1カラムにする */
-  mainGrid.classList.add("article-mode");
-
-  document.title = `${post.title} | 朝倉澪の日常`;
-
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
-      function handleRoute() {
-        const hash = window.location.hash.replace("#", "");
-
-        if (!hash) {
+        if (!post) {
           showList();
           return;
         }
 
+        articleTitle.textContent = post.title;
+        articleMeta.innerHTML = `
+          <span>${post.date}</span>
+          <span>・</span>
+          <span>${post.tag}</span>
+          <span>・</span>
+          <span>朝倉澪</span>
+        `;
+
+        articleBody.innerHTML = post.body
+          .map(
+            (paragraph, index) =>
+              `<p class="${index === 0 ? "lead-paragraph" : ""}">${paragraph}</p>`
+          )
+          .join("");
+
+        if (post.image) {
+          articleSide.innerHTML = `
+            <figure class="article-photo">
+              <img src="${post.image.src}" alt="${post.image.alt}">
+              ${post.image.caption ? `<figcaption>${post.image.caption}</figcaption>` : ""}
+            </figure>
+          `;
+          articleSide.classList.add("has-photo");
+          articleLayout.classList.remove("no-photo");
+        } else {
+          articleSide.innerHTML = "";
+          articleSide.classList.remove("has-photo");
+          articleLayout.classList.add("no-photo");
+        }
+
+        listPanel.style.display = "none";
+        articleView.classList.add("active");
+        heroSection.style.display = "none";
+        sidebarPanel.style.display = "none";
+        mainGrid.classList.add("article-mode");
+
+        document.title = `${post.title} | 朝倉澪の日常`;
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function handleRoute() {
+        const hash = window.location.hash.replace("#", "");
+        if (!hash) {
+          showList();
+          return;
+        }
         showArticle(hash);
       }
 
