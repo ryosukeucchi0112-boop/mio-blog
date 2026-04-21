@@ -450,6 +450,213 @@
           flex-direction: column;
         }
       }
+      /* ===== article detail refresh ===== */
+.article-view {
+  display: none;
+  padding: 34px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,248,252,0.98));
+}
+
+.article-view.active {
+  display: block;
+}
+
+.article-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: #fff6fa;
+  border: 1px solid #f0d9e4;
+  color: #8b7280;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.article-back:hover {
+  color: #b8648b;
+  background: #fff0f6;
+  transform: translateY(-1px);
+}
+
+.article-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 34px;
+  align-items: start;
+}
+
+.article-main {
+  min-width: 0;
+  max-width: 680px;
+}
+
+.article-title {
+  margin: 0 0 10px;
+  font-size: clamp(2rem, 3.2vw, 2.7rem);
+  line-height: 1.28;
+  letter-spacing: 0.02em;
+  color: #43353d;
+}
+
+.article-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin: 0 0 28px;
+  color: #8f7d87;
+  font-size: 0.92rem;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f0e5eb;
+}
+
+.article-meta::before {
+  content: "diary";
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #f8dbe8;
+  color: #96566f;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.article-body {
+  font-size: 1.02rem;
+  line-height: 2.1;
+  color: #564851;
+}
+
+.article-body p {
+  margin: 0 0 1.5em;
+  white-space: pre-line;
+}
+
+.article-body p:first-child {
+  font-size: 1.08rem;
+  color: #4c3e46;
+}
+
+.article-body p:last-child {
+  margin-bottom: 0;
+}
+
+.article-side {
+  display: none;
+}
+
+.article-side.has-photo {
+  display: block;
+}
+
+.article-photo {
+  margin: 0;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid #eadbe2;
+  background: #fffafb;
+  box-shadow:
+    0 18px 40px rgba(95, 63, 82, 0.10),
+    0 3px 10px rgba(95, 63, 82, 0.04);
+  position: sticky;
+  top: 92px;
+}
+
+.article-photo img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  background: #f2e8ee;
+}
+
+.article-photo figcaption {
+  padding: 14px 16px;
+  font-size: 0.9rem;
+  color: #7c6973;
+  background: linear-gradient(180deg, #fffdfd, #fff7fa);
+  border-top: 1px solid #efdee6;
+  line-height: 1.75;
+}
+
+#articleView {
+  position: relative;
+  overflow: hidden;
+}
+
+#articleView::before {
+  content: "";
+  position: absolute;
+  inset: auto -120px -140px auto;
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(217,143,177,0.12), rgba(217,143,177,0));
+  pointer-events: none;
+}
+
+#articleView::after {
+  content: "";
+  position: absolute;
+  inset: -80px auto auto -100px;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(248,219,232,0.55), rgba(248,219,232,0));
+  pointer-events: none;
+}
+
+@media (max-width: 860px) {
+  .article-layout {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .article-main {
+    max-width: none;
+  }
+
+  .article-side {
+    order: -1;
+  }
+
+  .article-photo {
+    position: static;
+  }
+
+  .article-photo img {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+@media (max-width: 640px) {
+  .article-view {
+    padding: 22px 18px;
+  }
+
+  .article-title {
+    font-size: 1.8rem;
+  }
+
+  .article-body {
+    font-size: 0.98rem;
+    line-height: 1.95;
+  }
+
+  .article-meta {
+    margin-bottom: 22px;
+  }
+}
+      .lead-paragraph {
+  font-size: 1.1rem;
+  color: #4a3b44;
+}
+      .article-side.has-photo .article-photo img {
+  aspect-ratio: 4 / 4.8;
+}
     </style>
   </head>
   <body>
@@ -746,7 +953,13 @@ function showList() {
         }
 
         articleTitle.textContent = post.title;
-        articleMeta.textContent = `${post.date}  ｜  ${post.tag}  ｜  朝倉澪`;
+        articleMeta.innerHTML = `
+  <span>${post.date}</span>
+  <span>・</span>
+  <span>${post.tag}</span>
+  <span>・</span>
+  <span>朝倉澪</span>
+`;
       const photoHtml = post.image
   ? `
     <figure class="article-photo">
@@ -756,7 +969,11 @@ function showList() {
   `
   : "";
 
-articleBody.innerHTML = post.body.map((paragraph) => `<p>${paragraph}</p>`).join("");
+articleBody.innerHTML = post.body
+  .map((paragraph, index) =>
+    `<p class="${index === 0 ? "lead-paragraph" : ""}">${paragraph}</p>`
+  )
+  .join("");
 articleSide.innerHTML = photoHtml;
 articleSide.classList.toggle("has-photo", !!post.image);
         listPanel.style.display = "none";
