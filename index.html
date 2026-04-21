@@ -304,6 +304,55 @@
         font-size: 0.88rem;
         text-align: center;
       }
+            .article-photo {
+        margin: 0 0 24px;
+        padding: 0;
+        border-radius: 20px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        background: #fff8fb;
+        box-shadow: 0 10px 24px rgba(95, 63, 82, 0.08);
+      }
+
+      .article-photo img {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+        display: block;
+        background: #f2e8ee;
+      }
+
+      .article-photo figcaption {
+        padding: 12px 14px;
+        font-size: 0.9rem;
+        color: var(--muted);
+        background: #fffdfd;
+        border-top: 1px solid var(--line);
+      }
+
+      .fiction-notice {
+        margin-top: 18px;
+        padding: 18px 20px;
+        border-radius: 18px;
+        border: 1px solid #e8cfd8;
+        background: linear-gradient(180deg, #fff8fb, #fff2f7);
+        text-align: center;
+      }
+
+      .fiction-notice strong {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 1rem;
+        color: #9b4f71;
+        letter-spacing: 0.08em;
+      }
+
+      .fiction-notice p {
+        margin: 0;
+        font-size: 0.9rem;
+        line-height: 1.8;
+        color: #7b6571;
+      }
 
       @media (max-width: 900px) {
         .main-grid {
@@ -417,11 +466,19 @@
       </section>
     </main>
 
-    <footer class="footer container">
-      <div class="footer-card">
-        © 2026 朝倉澪の日常
-      </div>
-    </footer>
+   <footer class="footer container">
+  <div class="footer-card">
+    © 2026 朝倉澪の日常
+  </div>
+
+  <div class="fiction-notice">
+    <strong>このサイトはフィクションです</strong>
+    <p>
+      このブログに登場する人物名・学校名・団体名・出来事・記述はすべて創作です。<br>
+      実在の人物・団体・事件・学校・医療機関とは一切関係ありません。
+    </p>
+  </div>
+</footer>
 
     <script>
       const posts = [
@@ -460,6 +517,11 @@
           title: "栞ちゃんとデートした日",
           excerpt:
             "今日は放課後、栞ちゃんと駅のショッピングモールに行ってきた。時間があっという間だった。",
+          image: {
+  src: "images/date-with-shiori.jpg",
+  alt: "成瀬栞と出かけた日の写真",
+  caption: "駅のショッピングモールで。いっぱい歩いて、いっぱい話した日。"
+},
           body: [
             "今日は放課後、栞ちゃんと駅のショッピングモールに行ってきた。\nデートっていう言い方すると変だけど、なんかそう言いたくなるくらい楽しかった。笑",
             "小さい頃の話をいっぱいした。\nあの頃よく行ってた場所とか、どうでもいいことで笑ってたこととか、忘れてたことまでどんどん思い出して、時間があっという間だった。",
@@ -503,6 +565,11 @@
           title: "栞ちゃんが倒れた",
           excerpt:
             "今日、栞ちゃんが突然倒れて救急車で運ばれた。大丈夫だと思いたいけど、やっぱり心配。",
+          image: {
+  src: "images/shiori-collapsed-day.jpg",
+  alt: "しおりが倒れた日の写真",
+  caption: "この日は、まさかこんなことになるなんて思ってなかった。"
+},
           body: [
             "今日、びっくりすることがあった。\n栞ちゃんが突然倒れて、救急車で運ばれた。",
             "本当に急なことで、最初は何が起きたのかわからなかった。\nでも、救急車の中で救急隊の人が『軽い貧血かもしれないので、そこまで深刻ではないと思います』みたいなことを言っていて、少し安心した。",
@@ -534,6 +601,11 @@
           title: "Suzukiという人",
           excerpt:
             "今日の夜、Suzukiっていう人から連絡が来た。事件について何か知ってるらしい。",
+          image: {
+  src: "images/message-from-suzuki.jpg",
+  alt: "Suzukiから連絡が来たときの画面",
+  caption: "夜に届いた、知らない相手からのメッセージ。"
+},
           body: [
             "今日の夜、Suzukiっていう人から連絡が来た。",
             "最初は誰かわからなくて怖かったけど、事件のことを知ってる感じだった。\nしかも、ただの噂じゃなくて、もっと具体的なことを知ってるみたいだった。",
@@ -606,7 +678,18 @@
 
         articleTitle.textContent = post.title;
         articleMeta.textContent = `${post.date}  ｜  ${post.tag}  ｜  朝倉澪`;
-        articleBody.innerHTML = post.body.map((paragraph) => `<p>${paragraph}</p>`).join("");
+       const photoHtml = post.image
+  ? `
+    <figure class="article-photo">
+      <img src="${post.image.src}" alt="${post.image.alt}">
+      ${post.image.caption ? `<figcaption>${post.image.caption}</figcaption>` : ""}
+    </figure>
+  `
+  : "";
+
+articleBody.innerHTML =
+  photoHtml +
+  post.body.map((paragraph) => `<p>${paragraph}</p>`).join("");
         listPanel.style.display = "none";
         articleView.classList.add("active");
         heroSection.style.display = "none";
