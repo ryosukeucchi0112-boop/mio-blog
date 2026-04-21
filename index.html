@@ -484,11 +484,18 @@
           </div>
 
           <article class="panel article-view" id="articleView">
-            <a href="#top" class="article-back" id="backButton">← 記事一覧に戻る</a>
-            <h1 class="article-title" id="articleTitle"></h1>
-            <div class="article-meta" id="articleMeta"></div>
-            <div class="article-body" id="articleBody"></div>
-          </article>
+  <a href="#top" class="article-back" id="backButton">← 記事一覧に戻る</a>
+
+  <div class="article-layout">
+    <div class="article-main">
+      <h1 class="article-title" id="articleTitle"></h1>
+      <div class="article-meta" id="articleMeta"></div>
+      <div class="article-body" id="articleBody"></div>
+    </div>
+
+    <aside class="article-side" id="articleSide"></aside>
+  </div>
+</article>
         </div>
 
         <aside class="sidebar" id="sidebarPanel">
@@ -702,6 +709,7 @@
       const sidebarPanel = document.getElementById("sidebarPanel");
       const backButton = document.getElementById("backButton");
       const homeLink = document.getElementById("homeLink");
+      const articleSide = document.getElementById("articleSide");
 
       function renderList() {
         postList.innerHTML = posts
@@ -719,15 +727,16 @@
           )
           .join("");
       }
-
-      function showList() {
-        listPanel.style.display = "block";
-        articleView.classList.remove("active");
-        heroSection.style.display = "block";
-        sidebarPanel.style.display = "flex";
-        document.title = "朝倉澪の日常 | 朝倉澪の個人ブログ";
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
+function showList() {
+  listPanel.style.display = "block";
+  articleView.classList.remove("active");
+  heroSection.style.display = "block";
+  sidebarPanel.style.display = "flex";
+  articleSide.innerHTML = "";
+  articleSide.classList.remove("has-photo");
+  document.title = "朝倉澪の日常 | 朝倉澪の個人ブログ";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
 
       function showArticle(postId) {
         const post = posts.find((item) => item.id === postId);
@@ -738,7 +747,7 @@
 
         articleTitle.textContent = post.title;
         articleMeta.textContent = `${post.date}  ｜  ${post.tag}  ｜  朝倉澪`;
-       const photoHtml = post.image
+      const photoHtml = post.image
   ? `
     <figure class="article-photo">
       <img src="${post.image.src}" alt="${post.image.alt}">
@@ -747,9 +756,9 @@
   `
   : "";
 
-articleBody.innerHTML =
-  photoHtml +
-  post.body.map((paragraph) => `<p>${paragraph}</p>`).join("");
+articleBody.innerHTML = post.body.map((paragraph) => `<p>${paragraph}</p>`).join("");
+articleSide.innerHTML = photoHtml;
+articleSide.classList.toggle("has-photo", !!post.image);
         listPanel.style.display = "none";
         articleView.classList.add("active");
         heroSection.style.display = "none";
